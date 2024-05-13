@@ -8,7 +8,7 @@ from modules.ui_components import ToolButton, ResizeHandleRow
 import modules.generation_parameters_copypaste as parameters_copypaste
 from modules.ui_common import save_files
 
-from scripts import lama
+from custom import lama
 from PIL import Image
 
 def send_to_cleaner(result):
