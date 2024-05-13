@@ -4,9 +4,8 @@ from modules.api.models import *
 from modules.api import api
 import gradio as gr
 
-from scripts import lama
-from scripts import ocr
-from modules.shared import opts, OptionInfo
+from custom import lama
+from custom import ocr
 
 
 def cleanup_api(_: gr.Blocks, app: FastAPI):
@@ -44,7 +43,6 @@ def cleanup_api(_: gr.Blocks, app: FastAPI):
 
 try:
     import modules.script_callbacks as script_callbacks
-
     script_callbacks.on_app_started(cleanup_api)
 except:
     pass
