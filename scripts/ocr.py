@@ -6,12 +6,31 @@ from PIL import Image, ImageDraw
 EXTENSION_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_PATH = os.path.join(EXTENSION_PATH, "models", "EasyOCR")
 
-print("begin to load easy ocr model,path is %s" % (MODEL_PATH))
-reader = easyocr.Reader(lang_list=['ch_sim', 'en'], model_storage_directory=os.path.join(MODEL_PATH, 'model'),
-                        download_enabled=True,
-                        detector=True, recognizer=False,
-                        user_network_directory=os.path.join(MODEL_PATH, 'user_network'), detect_network='craft')
-print("finish to load easy ocr model,path is %s" % (MODEL_PATH))
+
+class TextDetector:
+    _instance = None
+
+    def __new__(cls, *args, **kw):
+        if cls._instance is None:
+            cls._instance = object.__new__(cls, *args, **kw)
+        return cls._instance
+
+    def __init__(self):
+        print("begin to load easy ocr model,path is %s" % (MODEL_PATH))
+
+        self._model = easyocr.Reader(lang_list=['ch_sim', 'en'],
+                                     model_storage_directory=os.path.join(MODEL_PATH, 'model'),
+                                     download_enabled=True,
+                                     detector=True, recognizer=False,
+                                     user_network_directory=os.path.join(MODEL_PATH, 'user_network'),
+                                     detect_network='craft')
+        print("finish to load easy ocr model,path is %s" % (MODEL_PATH))
+
+    def detect(self, bytes_data):
+        return self._model.detect(bytes_data)
+
+
+text_detector = TextDetector()
 
 
 def get_mask_from_file(img):
@@ -20,10 +39,11 @@ def get_mask_from_file(img):
     height = img.height
     width = img.width
     mode = img.mode
+
     with io.BytesIO() as output_bytes:
         img.save(output_bytes, format="PNG")
         bytes_data = output_bytes.getvalue()
-    horizontal_list, free_list = reader.detect(bytes_data)
+    horizontal_list, free_list = text_detector.detect(bytes_data)
     list = []
     for item in horizontal_list:
         for c in item:
@@ -42,7 +62,7 @@ def _make_mask(cooridate_list, height: int, width: int, mode: str) -> Image:
 
     mask = Image.new(mode, (width, height), background_color)
     mask_draw = ImageDraw.Draw(mask)
-    for cooridate in cooridate_list:
-        mask_draw.rectangle(xy=(cooridate["x_min"], cooridate["y_min"], cooridate["x_max"], cooridate["y_max"]),
+    for coordinate in cooridate_list:
+        mask_draw.rectangle(xy=(coordinate["x_min"], coordinate["y_min"], coordinate["x_max"], coordinate["y_max"]),
                             fill=mask_color)
     return mask
