@@ -11,11 +11,6 @@ from modules.ui_common import save_files
 from scripts import lama
 from PIL import Image
 
-def on_ui_settings():
-    section = ('cleaner', "Cleaner")
-    opts.add_option("cleaner_use_gpu", OptionInfo(True, "Is Use GPU", gr.Checkbox, {"interactive": True}, section=section))
-
-
 def send_to_cleaner(result):
     image = Image.open(result[0]["name"])
 
@@ -24,9 +19,6 @@ def send_to_cleaner(result):
     return image
 
 def on_ui_tabs():
-    
-
-        
     with gr.Blocks() as object_cleaner_tab:
 
         for tab_name in ["Clean up", "Clean up upload"]:
@@ -110,5 +102,4 @@ def on_ui_tabs():
 
 
 script_callbacks.on_ui_tabs(on_ui_tabs)
-script_callbacks.on_ui_settings(on_ui_settings)
 
