@@ -5,27 +5,25 @@ from modules.api import api
 import gradio as gr
 
 from scripts import lama
+from scripts import ocr
 from modules.shared import opts,OptionInfo
 
 
-
 def cleanup_api(_: gr.Blocks, app: FastAPI):
-
     @app.post("/cleanup")
     def clean_up(
-        input_image: str = Body("", title='cleanup input image'),
-        mask: str = Body("", title='clean up mask')
+            input_image: str = Body("", title='cleanup input image',embed=True)
     ):
 
         _image = api.decode_base64_to_image(input_image)
-        _mask = api.decode_base64_to_image(mask)
-        
-        _output = lama.clean_object(_image,_mask)
-        
+        _mask = ocr.get_mask_from_file(_image)
+
+        _output = lama.clean_object(_image, _mask)
+
         if len(_output) > 0:
-            return {"code": 0, "message":"ok", "image":  api.encode_pil_to_base64(_output[0]).decode("utf-8")}
+            return {"code": 0, "message": "ok", "image": api.encode_pil_to_base64(_output[0]).decode("utf-8")}
         else:
-            return {"code": -1, "message":"Image generation failed"}
+            return {"code": -1, "message": "Image generation failed"}
 
 
 try:

@@ -7,7 +7,7 @@ from modules.shared import opts
 
 
 EXTENSION_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_PATH = os.path.join(EXTENSION_PATH, "models")
+MODEL_PATH = os.path.join(EXTENSION_PATH, "models","lama")
 
 
 def clean_object_init_img_with_mask(init_img_with_mask):
@@ -62,7 +62,7 @@ class LiteLama2(LiteLama):
             if  os.path.exists(checkpoint_path) and os.path.isfile(checkpoint_path):
                 pass
             else:
-                download_file("https://huggingface.co/anyisalin/big-lama/resolve/main/big-lama.safetensors", checkpoint_path)
+                download_file("https://aod.cos.tx.xmcdn.com/storages/anyisalin/big-lama/big-lama.safetensors", checkpoint_path)
                 
             self._checkpoint_path = checkpoint_path
         
