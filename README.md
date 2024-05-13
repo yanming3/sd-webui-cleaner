@@ -1,43 +1,21 @@
 # Cleaner for Stable Diffusion WebUI
-
-
-
-
-<table>
-  <tr>
-    <td align="center" vertical-align="center">
-        <a href="https://novita.ai/?utm_source=github_organization&utm_medium=banner&utm_campaign=sd-webui-cleaner">
-            <img src="https://raw.githubusercontent.com/wiki/novitalabs/sd-webui-cleaner/images/logo2.png" width="120px;" alt="Unsplash" />
-        </a>
-    </td>
-    <td align="center" vertical-align="center">
-      <b>AI image generation API</b>
-      <br />
-        <span text-align: center>Now we have provided the API for remove object.</span>   
-        <a href="https://novita.ai/?utm_source=github_organization&utm_medium=banner&utm_campaign=sd-webui-cleaner">Cleanup API</a>
-    </td>
-  </tr>
-</table>
-
-
-This is a WEBUI extension that provides image erasure functionality. It supports both UI and API simultaneously. Powered by [lama](https://github.com/advimman/lama)
-
-![example1](https://raw.githubusercontent.com/wiki/novitalabs/sd-webui-cleaner/images/example1.png)
-
-<br>
+从 `https://github.com/novitalabs/sd-webui-cleaner`项目fork出来的，根据需要增加了识别并去除图片文字的功能
 
 ## Installation
-Clone this project in the WEBUI extensions folder
+
+Clone this project in the WEBUI extensions folder(stable-diffusion-webui/extensions目录)
+
 ```
-git clone https://github.com/novitalabs/sd-webui-cleaner.git
+git clone https://github.com/yanming3/sd-webui-cleaner
 ```
 <br>
 
-## Get Started
+注意：该项目依赖litelama和easyocr,如果stable-diffusion-webui禁用了自动安装功能，请手动安装:
 
-https://github.com/novitalabs/sd-webui-cleaner/assets/55743667/3f9f652b-d3b7-4c08-a4c6-0e9fe731c77c
-
-<br>
+```
+pip install litelama==0.1.7
+pip install easyocr==1.7.1
+```
 
 ### API
 
@@ -47,8 +25,7 @@ POST http://127.0.0.1:7860/cleanup
 
 body:
 {
-    "input_image": "<image base64 string>",
-    "mask": "<mask base64 string>"
+    "input_image": "<image base64 string>"
 }
 
 
@@ -70,3 +47,4 @@ If you don't have a GPU, please set the cleaner_use_cpu parameter to true throug
 ## Thanks
 - https://github.com/advimman/lama
 - https://github.com/Sanster/lama-cleaner
+- https://github.com/novitalabs/sd-webui-cleaner
