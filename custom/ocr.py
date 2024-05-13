@@ -1,6 +1,7 @@
 import os
 import io
 import easyocr
+import torch
 from PIL import Image, ImageDraw
 
 EXTENSION_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -16,15 +17,17 @@ class TextDetector:
         return cls._instance
 
     def __init__(self):
-        print("begin to load easy ocr model,path is %s" % (MODEL_PATH))
+        is_use_gpu = torch.cuda.is_available()
 
+        print(f"begin to load easy ocr model,path is  {MODEL_PATH},use gpu={is_use_gpu}")
         self._model = easyocr.Reader(lang_list=['ch_sim', 'en'],
+                                     gpu=is_use_gpu,
                                      model_storage_directory=os.path.join(MODEL_PATH, 'model'),
                                      download_enabled=True,
                                      detector=True, recognizer=False,
                                      user_network_directory=os.path.join(MODEL_PATH, 'user_network'),
                                      detect_network='craft')
-        print("finish to load easy ocr model,path is %s" % (MODEL_PATH))
+        print(f"finish to load easy ocr model,path is  {MODEL_PATH},use gpu={is_use_gpu}")
 
     def detect(self, bytes_data):
         return self._model.detect(bytes_data)

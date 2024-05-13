@@ -47,9 +47,9 @@ class LiteLama2(LiteLama):
                         self._checkpoint_path = checkpoint_path
 
                     torch_device = "cuda" if torch.cuda.is_available() else "cpu"
-                    print("begin to load lama model,path is %s" % (self._checkpoint_path))
+                    print(f"begin to load lama model,path = {self._checkpoint_path},device = {torch_device}")
                     self.load(location=torch_device)
-                    print("finish to load lama model,path is %s" % (self._checkpoint_path))
+                    print(f"finish to load lama model,path = {self._checkpoint_path},device = {torch_device}")
 
 
 cleaner = LiteLama2()
