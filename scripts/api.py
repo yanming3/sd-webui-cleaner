@@ -9,7 +9,7 @@ from custom import ocr
 
 
 def cleanup_api(_: gr.Blocks, app: FastAPI):
-    @app.post("/cleanup")
+    @app.post("/sdapi/v1/cleanup")
     def clean_up(
             input_image: str = Body("", title='cleanup input image', embed=True)
     ):
@@ -24,7 +24,7 @@ def cleanup_api(_: gr.Blocks, app: FastAPI):
         else:
             return {"code": -1, "message": "Image generation failed"}
 
-    @app.post("/cleanup_with_mask")
+    @app.post("/sdapi/v1/cleanup_with_mask")
     def cleanup_with_mask(
             input_image: str = Body("", title='cleanup input image'),
             mask: str = Body("", title='clean up mask')
