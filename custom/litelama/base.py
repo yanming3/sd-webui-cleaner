@@ -4,8 +4,8 @@ from typing import Tuple, List
 import torch
 import torch.nn as nn
 
-from litelama.depthwise_sep_conv import DepthWiseSeperableConv
-from litelama.multidilated_conv import MultidilatedConv
+from custom.litelama.depthwise_sep_conv import DepthWiseSeperableConv
+from custom.litelama.multidilated_conv import MultidilatedConv
 
 
 class BaseDiscriminator(nn.Module):

@@ -4,8 +4,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from litelama.base import get_conv_block_ctor, get_activation
-from litelama.pix2pixhd import ResnetBlock
+from custom.litelama.base import get_conv_block_ctor, get_activation
+from custom.litelama.pix2pixhd import ResnetBlock
 
 
 class ResNetHead(nn.Module):

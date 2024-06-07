@@ -7,9 +7,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from litelama.base import get_activation, BaseDiscriminator
-from litelama.spatial_transform import LearnableSpatialTransformWrapper
-from litelama.squeeze_excitation import SELayer
+from custom.litelama.base import get_activation, BaseDiscriminator
+from custom.litelama.spatial_transform import LearnableSpatialTransformWrapper
+from custom.litelama.squeeze_excitation import SELayer
 
 
 class FFCSE_block(nn.Module):

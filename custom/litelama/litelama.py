@@ -1,4 +1,4 @@
-from litelama.model import load_model
+from custom.litelama.model import load_model
 from typing import Optional
 from PIL import ImageOps, Image
 import torch

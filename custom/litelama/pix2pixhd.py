@@ -8,9 +8,9 @@ from collections import defaultdict
 import numpy as np
 import torch.nn as nn
 
-from litelama.base import BaseDiscriminator, deconv_factory, get_conv_block_ctor, get_norm_layer, get_activation
-from litelama.ffc import FFCResnetBlock
-from litelama.multidilated_conv import MultidilatedConv
+from custom.litelama.base import BaseDiscriminator, deconv_factory, get_conv_block_ctor, get_norm_layer, get_activation
+from custom.litelama.ffc import FFCResnetBlock
+from custom.litelama.multidilated_conv import MultidilatedConv
 
 class DotDict(defaultdict):
     # https://stackoverflow.com/questions/2352181/how-to-use-a-dot-to-access-members-of-dictionary
