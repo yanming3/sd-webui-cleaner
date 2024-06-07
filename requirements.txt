@@ -1,2 +1,0 @@
-easyocr==1.7.1
-litelama==0.1.7

@@ -1,6 +1,6 @@
 import os
 import io
-import easyocr
+from custom.easyocr import Reader
 import torch
 from PIL import Image, ImageDraw
 
@@ -20,7 +20,7 @@ class TextDetector:
         is_use_gpu = torch.cuda.is_available()
 
         print(f"begin to load easy ocr model,path is  {MODEL_PATH},use gpu={is_use_gpu}")
-        self._model = easyocr.Reader(lang_list=['ch_sim', 'en'],
+        self._model = Reader(lang_list=['ch_sim', 'en'],
                                      gpu=is_use_gpu,
                                      model_storage_directory=os.path.join(MODEL_PATH, 'model'),
                                      download_enabled=True,

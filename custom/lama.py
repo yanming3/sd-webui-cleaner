@@ -2,8 +2,8 @@ import os
 import threading
 
 import torch
-from litelama import LiteLama
-from litelama.model import download_file
+from custom.litelama import LiteLama
+from custom.litelama.model import download_file
 
 EXTENSION_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_PATH = os.path.join(EXTENSION_PATH, "models", "lama")
